@@ -24,14 +24,14 @@ public class SeigeWarApproval extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         saveDefaultConfig();
+
+        getServer().getPluginManager().registerEvents(this, this);
+        getServer().getPluginManager().registerEvents(new BannerListener(approvedPlayers), this);
+        Objects.requireNonNull(getCommand("dma")).setExecutor(new DMACommand());
+        getLogger().info("Ronik's Siege War Approval Plugin has been enabled. Use /dma <approve|disapprove> <player> to approve or disapprove a player.");
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
             Bukkit.getLogger().warning("PlaceholderAPI is not installed! Some features may not work.");
         }
-        getServer().getPluginManager().registerEvents(new BannerListener(approvedPlayers), this);
-        getServer().getPluginManager().registerEvents(this, this);
-        Objects.requireNonNull(getCommand("dma")).setExecutor(new DMACommand());
-        getLogger().info("Ronik's Siege War Approval Plugin has been enabled. Use /dma <approve|disapprove> <player> to approve or disapprove a player.");
-
     }
 
     @Override
