@@ -1,0 +1,19 @@
+name: SeigeWarApproval
+version: '1.0-SNAPSHOT'
+main: org.ronik.seigeWarApproval.SeigeWarApproval
+api-version: '1.20'
+
+commands:
+  dma:
+    description: DMCA commands
+    usage: /dma <approve|disapprove> <player>
+    permission: dma.approve
+
+
+permissions:
+  dma.approve:
+    description: Allows a user to approve a player to start a war.
+    default: op
+
+softdepend:
+  - PlaceholderAPI
