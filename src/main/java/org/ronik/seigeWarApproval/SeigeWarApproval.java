@@ -40,7 +40,7 @@ public class SeigeWarApproval extends JavaPlugin implements Listener {
         getLogger().info("Ronik's Siege War Approval Plugin has been disabled.");
     }
 
-    // Command executor for /dma approve <player>
+    // Command executor for /dma approve <player>.
     public class DMACommand implements CommandExecutor {
         @Override
         public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
