@@ -10,6 +10,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+
+import org.ronik.seigeWarApproval.Listeners.BannerListener;
+import org.ronik.seigeWarApproval.Utils.Approval;
+
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.UUID;
@@ -24,9 +28,8 @@ public class SeigeWarApproval extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         saveDefaultConfig();
-
         getServer().getPluginManager().registerEvents(this, this);
-        getServer().getPluginManager().registerEvents(new BannerListener(approvedPlayers), this);
+        getServer().getPluginManager().registerEvents(new BannerListener(this, approvedPlayers), this);
         Objects.requireNonNull(getCommand("dma")).setExecutor(new DMACommand());
         getLogger().info("Ronik's Siege War Approval Plugin has been enabled. Use /dma <approve|disapprove> <player> to approve or disapprove a player.");
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {

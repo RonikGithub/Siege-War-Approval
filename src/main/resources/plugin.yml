@@ -8,7 +8,10 @@ commands:
     description: DMCA commands
     usage: /dma <approve|disapprove> <player>
     permission: dma.approve
-
+    permission-message: You do not have permission to use this command.
+    aliases:
+      - SeigeWarApproval
+      - swa
 
 permissions:
   dma.approve:
@@ -17,3 +20,4 @@ permissions:
 
 softdepend:
   - PlaceholderAPI
+

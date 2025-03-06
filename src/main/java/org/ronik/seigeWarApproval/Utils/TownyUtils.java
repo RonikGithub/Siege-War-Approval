@@ -1,4 +1,4 @@
-package org.ronik.seigeWarApproval;
+package org.ronik.seigeWarApproval.Utils;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.entity.Player;

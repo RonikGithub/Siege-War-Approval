@@ -1,4 +1,4 @@
-package org.ronik.seigeWarApproval;
+package org.ronik.seigeWarApproval.Utils;
 
 // Approval record class to store the expiration time of the approval.
 public class Approval {

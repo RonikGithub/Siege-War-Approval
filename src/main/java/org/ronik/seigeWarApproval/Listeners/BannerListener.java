@@ -1,4 +1,4 @@
-package org.ronik.seigeWarApproval;
+package org.ronik.seigeWarApproval.Listeners;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
@@ -10,6 +10,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.ronik.seigeWarApproval.SeigeWarApproval;
+import org.ronik.seigeWarApproval.Utils.Approval;
+import org.ronik.seigeWarApproval.Utils.TownyUtils;
 
 import java.util.Map;
 import java.util.UUID;
@@ -21,11 +24,13 @@ import java.util.UUID;
     * If the player is in a town, the plugin will ignore it
  */
 
-public class BannerListener extends JavaPlugin implements Listener {
+public class BannerListener implements Listener {
 
     private final Map<UUID, Approval> approvedPlayers;
+    private final SeigeWarApproval plugin;
 
-    public BannerListener(Map<UUID, Approval> approvedPlayers) {
+    public BannerListener(SeigeWarApproval plugin, Map<UUID, Approval> approvedPlayers) {
+        this.plugin = plugin;
         this.approvedPlayers = approvedPlayers;
     }
 
@@ -51,7 +56,7 @@ public class BannerListener extends JavaPlugin implements Listener {
         if (!approvedPlayers.containsKey(playerId)) {
             event.setCancelled(true);
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED + "You need approval to start a siege."));
-            getLogger().info("Player " + player.getName() + " tried to place a banner without approval.");
+            plugin.getLogger().info("Player " + player.getName() + " tried to place a banner without approval.");
             return;
         }
 
@@ -62,7 +67,7 @@ public class BannerListener extends JavaPlugin implements Listener {
             approvedPlayers.remove(playerId);
             event.setCancelled(true);
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED + "Your approval has expired."));
-            getLogger().info("Player " + player.getName() + " tried to place a banner without approval.");
+            plugin.getLogger().info("Player " + player.getName() + " tried to place a banner without approval.");
             return;
         }
 
