@@ -10,7 +10,7 @@ commands:
     permission: dma.approve
     permission-message: You do not have permission to use this command.
     aliases:
-      - SeigeWarApproval
+      - SiegeWarApproval
       - swa
 
 permissions:
