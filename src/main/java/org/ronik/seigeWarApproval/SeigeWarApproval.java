@@ -9,11 +9,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
-
-
 import org.jetbrains.annotations.NotNull;
+
 import org.ronik.seigeWarApproval.Listeners.BannerListener;
+import org.ronik.seigeWarApproval.Listeners.RankCheckListener;
 import org.ronik.seigeWarApproval.Utils.Approval;
+import static org.ronik.seigeWarApproval.Utils.Prefix.PREFIX;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -25,14 +26,12 @@ public class SeigeWarApproval extends JavaPlugin implements Listener {
     // Map to store approved players along with the expiration time.
     private final HashMap<UUID, Approval> approvedPlayers = new HashMap<>();
 
-    // Prefix for plugin messages.
-    private final String prefix = "[" + ChatColor.GREEN + "SiegeWarApproval" + ChatColor.RESET + "] ";
-
     @Override
     public void onEnable() {
         saveDefaultConfig();
         getServer().getPluginManager().registerEvents(this, this);
-        getServer().getPluginManager().registerEvents(new BannerListener(this, approvedPlayers), this);
+        getServer().getPluginManager().registerEvents(new BannerListener(this), this);
+        getServer().getPluginManager().registerEvents(new RankCheckListener(this), this);
         Objects.requireNonNull(getCommand("dma")).setExecutor(new DMACommand());
         getLogger().info("Ronik's Siege War Approval Plugin has been enabled. Use /dma <approve|disapprove> <player> to approve or disapprove a player.");
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
@@ -42,8 +41,11 @@ public class SeigeWarApproval extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic if needed
         getLogger().info("Ronik's Siege War Approval Plugin has been disabled.");
+    }
+
+    public HashMap<UUID, Approval> getApprovedPlayers() {
+        return approvedPlayers;
     }
 
     // Command executor for /dma approve <player>.
@@ -53,13 +55,13 @@ public class SeigeWarApproval extends JavaPlugin implements Listener {
 
             // Check if the sender has the required permission.
             if (!sender.hasPermission("dma.approve")) {
-                sender.sendMessage(prefix + "You do not have permission to use this command.");
+                sender.sendMessage(PREFIX + "You do not have permission to use this command.");
                 return true;
             }
 
             // Command usage: /dma <approve|disapprove> <player>
             if (args.length < 2 || (!args[0].equalsIgnoreCase("approve") && !args[0].equalsIgnoreCase("disapprove"))) {
-                sender.sendMessage(prefix + "Usage: /dma <approve|disapprove> <player>");
+                sender.sendMessage(PREFIX + "Usage: /dma <approve|disapprove> <player>");
                 return true;
             }
 
@@ -68,7 +70,7 @@ public class SeigeWarApproval extends JavaPlugin implements Listener {
             // Get the target player (must be online)
             Player targetPlayer = getServer().getPlayerExact(targetPlayerName);
             if (targetPlayer == null) {
-                sender.sendMessage(prefix + targetPlayerName + " not found.");
+                sender.sendMessage(PREFIX + targetPlayerName + " not found.");
                 return true;
             }
 
@@ -81,11 +83,11 @@ public class SeigeWarApproval extends JavaPlugin implements Listener {
                 Approval approval = new Approval(expirationTime);
                 approvedPlayers.put(targetPlayer.getUniqueId(), approval);
 
-                sender.sendMessage(prefix + "Player " +
+                sender.sendMessage(PREFIX + "Player " +
                         targetPlayerName + " approved for " + minutes + " minutes.");
 
 
-                targetPlayer.sendMessage(prefix +
+                targetPlayer.sendMessage(PREFIX +
                         "You have been approved to start a siege for " + ChatColor.GREEN + minutes +
                         ChatColor.RESET + " minutes.");
 
@@ -98,7 +100,7 @@ public class SeigeWarApproval extends JavaPlugin implements Listener {
                             Approval currentApproval = approvedPlayers.get(targetPlayer.getUniqueId());
                             if (currentApproval.getExpirationTime() <= System.currentTimeMillis()) {
                                 approvedPlayers.remove(targetPlayer.getUniqueId());
-                                targetPlayer.sendMessage(prefix + "Your approval has expired.");
+                                targetPlayer.sendMessage(PREFIX + "Your approval has expired.");
                             }
                         }
                     }
@@ -110,11 +112,11 @@ public class SeigeWarApproval extends JavaPlugin implements Listener {
             else if (args[0].equalsIgnoreCase("disapprove")) {
                 if (approvedPlayers.containsKey(targetPlayer.getUniqueId())) {
                     approvedPlayers.remove(targetPlayer.getUniqueId());
-                    sender.sendMessage(prefix + "Player " +
+                    sender.sendMessage(PREFIX + "Player " +
                             targetPlayerName + " disapproved.");
-                    targetPlayer.sendMessage(prefix + "Your approval has been revoked.");
+                    targetPlayer.sendMessage(PREFIX + "Your approval has been revoked.");
                 } else {
-                    sender.sendMessage(prefix + "Player " + targetPlayerName + " is not approved.");
+                    sender.sendMessage(PREFIX + "Player " + targetPlayerName + " is not approved.");
                 }
             }
 
