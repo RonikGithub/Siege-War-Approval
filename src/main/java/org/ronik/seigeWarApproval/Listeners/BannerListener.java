@@ -67,7 +67,6 @@ public class BannerListener implements Listener {
             event.setCancelled(true);
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED + "Your approval has expired."));
             plugin.getLogger().info("Player " + player.getName() + " tried to place a banner without approval.");
-            return;
         }
 
         // Player is approved, plugin will NOT cancel the event, thus siegewar will access the banner place event
