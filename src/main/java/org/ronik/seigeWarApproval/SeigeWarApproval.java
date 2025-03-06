@@ -11,6 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 
+import org.jetbrains.annotations.NotNull;
 import org.ronik.seigeWarApproval.Listeners.BannerListener;
 import org.ronik.seigeWarApproval.Utils.Approval;
 
@@ -23,6 +24,8 @@ public class SeigeWarApproval extends JavaPlugin implements Listener {
 
     // Map to store approved players along with the expiration time.
     private final HashMap<UUID, Approval> approvedPlayers = new HashMap<>();
+
+    // Prefix for plugin messages.
     private final String prefix = "[" + ChatColor.GREEN + "SiegeWarApproval" + ChatColor.RESET + "] ";
 
     @Override
@@ -46,7 +49,7 @@ public class SeigeWarApproval extends JavaPlugin implements Listener {
     // Command executor for /dma approve <player>.
     public class DMACommand implements CommandExecutor {
         @Override
-        public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        public boolean onCommand(CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
 
             // Check if the sender has the required permission.
             if (!sender.hasPermission("dma.approve")) {
