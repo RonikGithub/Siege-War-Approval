@@ -37,15 +37,15 @@ public class BannerListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onBlockPlace(BlockPlaceEvent event) {
 
-        // If the player is in a town, event does not get cancelled
-        if (TownyUtils.isInTown(event.getPlayer())) {
-            return;
-        }
-
         Material placedType = event.getBlockPlaced().getType();
 
         // if the block placed is not a banner
         if (!placedType.name().contains("BANNER")) {
+            return;
+        }
+
+        // If the player is in a town, event does not get cancelled
+        if (TownyUtils.isInTown(event.getPlayer())) {
             return;
         }
 
