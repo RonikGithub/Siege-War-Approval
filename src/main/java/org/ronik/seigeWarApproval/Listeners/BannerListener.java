@@ -9,7 +9,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.ronik.seigeWarApproval.SeigeWarApproval;
 import org.ronik.seigeWarApproval.Utils.Approval;
 import org.ronik.seigeWarApproval.Utils.TownyUtils;
@@ -29,12 +28,12 @@ public class BannerListener implements Listener {
     private final Map<UUID, Approval> approvedPlayers;
     private final SeigeWarApproval plugin;
 
-    public BannerListener(SeigeWarApproval plugin, Map<UUID, Approval> approvedPlayers) {
-        this.plugin = plugin;
-        this.approvedPlayers = approvedPlayers;
+    public BannerListener(SeigeWarApproval instance) {
+        this.plugin = instance;
+        this.approvedPlayers = instance.getApprovedPlayers();
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.LOWEST) // Lowest priority sounds counterintuitive, but it is necessary to cancel the event before siegewar can access it
     public void onBlockPlace(BlockPlaceEvent event) {
 
         Material placedType = event.getBlockPlaced().getType();
