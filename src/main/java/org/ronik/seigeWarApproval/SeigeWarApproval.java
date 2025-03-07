@@ -14,7 +14,9 @@ import org.jetbrains.annotations.NotNull;
 import org.ronik.seigeWarApproval.Listeners.BannerListener;
 import org.ronik.seigeWarApproval.Listeners.RankCheckListener;
 import org.ronik.seigeWarApproval.Utils.Approval;
+
 import static org.ronik.seigeWarApproval.Utils.Prefix.PREFIX;
+import static org.ronik.seigeWarApproval.Utils.Prefix.RONIK_ART;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -37,6 +39,7 @@ public class SeigeWarApproval extends JavaPlugin implements Listener {
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
             Bukkit.getLogger().warning("PlaceholderAPI is not installed! Some features may not work.");
         }
+        getLogger().info(RONIK_ART);
     }
 
     @Override
