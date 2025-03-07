@@ -35,7 +35,7 @@ public class RankCheckListener implements Listener {
         String message = event.getMessage();
         String[] args = message.split(" ");
 
-        if (    args.length < 5 ||
+        if (args.length < 5 ||
                 (!args[0].equalsIgnoreCase("/n") && !args[0].equalsIgnoreCase("/nation")) ||
                 !args[1].equalsIgnoreCase("rank") ||
                 !args[2].equalsIgnoreCase("add")) {
