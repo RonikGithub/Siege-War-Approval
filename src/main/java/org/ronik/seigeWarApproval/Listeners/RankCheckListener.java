@@ -1,5 +1,6 @@
 package org.ronik.seigeWarApproval.Listeners;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -52,9 +53,14 @@ public class RankCheckListener implements Listener {
         if (target.hasPlayedBefore()) {
             int playTimeTicks = target.getStatistic(Statistic.PLAY_ONE_MINUTE);
             long playTimeHours = (playTimeTicks / 20L) / 3600L;
-
             if (playTimeHours < requiredPlaytimeHours) {
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "townyadmin nation rank remove " + playerName + " " + rank);
+                String nationName = PlaceholderAPI.setPlaceholders(target, "%townyadvanced_nation%");
+                if (!nationName.isEmpty()) {
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
+                            "townyadmin nation " + nationName + " rank remove " + playerName + " " + rank);
+                } else {
+                    Bukkit.getLogger().warning("Player " + playerName + " is not in a nation or PlaceholderAPI returned null.");
+                }
                 event.getPlayer().sendMessage(PREFIX + ChatColor.RED + "Player " + playerName + " has not played long enough for this rank.");
             }
         } else {
