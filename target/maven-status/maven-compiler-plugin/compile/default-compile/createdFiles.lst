@@ -1,6 +1,8 @@
-org\ronik\seigeWarApproval\BannerListener.class
-org\ronik\seigeWarApproval\TownyUtils.class
-org\ronik\seigeWarApproval\Approval.class
+org\ronik\seigeWarApproval\Listeners\BannerListener.class
+org\ronik\seigeWarApproval\Utils\Approval.class
+org\ronik\seigeWarApproval\Utils\TownyUtils.class
 org\ronik\seigeWarApproval\SeigeWarApproval.class
 org\ronik\seigeWarApproval\SeigeWarApproval$DMACommand$1.class
+org\ronik\seigeWarApproval\Listeners\RankCheckListener.class
+org\ronik\seigeWarApproval\Utils\Prefix.class
 org\ronik\seigeWarApproval\SeigeWarApproval$DMACommand.class

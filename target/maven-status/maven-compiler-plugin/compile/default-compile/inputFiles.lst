@@ -1,4 +1,6 @@
-C:\Users\ronik\IdeaProjects\SeigeWarApproval\src\main\java\org\ronik\seigeWarApproval\Approval.java
-C:\Users\ronik\IdeaProjects\SeigeWarApproval\src\main\java\org\ronik\seigeWarApproval\BannerListener.java
+C:\Users\ronik\IdeaProjects\SeigeWarApproval\src\main\java\org\ronik\seigeWarApproval\Listeners\BannerListener.java
+C:\Users\ronik\IdeaProjects\SeigeWarApproval\src\main\java\org\ronik\seigeWarApproval\Listeners\RankCheckListener.java
 C:\Users\ronik\IdeaProjects\SeigeWarApproval\src\main\java\org\ronik\seigeWarApproval\SeigeWarApproval.java
-C:\Users\ronik\IdeaProjects\SeigeWarApproval\src\main\java\org\ronik\seigeWarApproval\TownyUtils.java
+C:\Users\ronik\IdeaProjects\SeigeWarApproval\src\main\java\org\ronik\seigeWarApproval\Utils\Approval.java
+C:\Users\ronik\IdeaProjects\SeigeWarApproval\src\main\java\org\ronik\seigeWarApproval\Utils\Prefix.java
+C:\Users\ronik\IdeaProjects\SeigeWarApproval\src\main\java\org\ronik\seigeWarApproval\Utils\TownyUtils.java
