@@ -11,7 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.ronik.seigeWarApproval.SeigeWarApproval;
 import org.ronik.seigeWarApproval.Utils.Approval;
-import org.ronik.seigeWarApproval.Utils.TownyUtils;
+import com.palmergames.bukkit.towny.TownyAPI;
 
 import java.util.Map;
 import java.util.UUID;
@@ -43,8 +43,8 @@ public class BannerListener implements Listener {
             return;
         }
 
-        // If the player is in a town, event does not get cancelled
-        if (TownyUtils.isInTown(event.getPlayer())) {
+        // If the block is not placed in the wilderness, event does not get cancelled
+        if (!"Wilderness".equalsIgnoreCase(TownyAPI.getInstance().getTownName(event.getBlock().getLocation()))) {
             return;
         }
 
